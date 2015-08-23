@@ -12,7 +12,7 @@ function displaySelected(display) {
 }
 React.render(
   <div>
-    <button onClick={startPresentation}>Start</button>
+    <button onClick={startPresentation}>Start / Stop</button>
     <ScreenSelector onDisplaySelected={displaySelected}/>
     <ImageFolder/>
   </div>, document.body);

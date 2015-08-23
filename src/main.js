@@ -34,17 +34,13 @@ ipc.on('start-presentation', function() {
 		'page-visibility': true
 	});
 	presentationWin.setMenuBarVisibility(false);
-	// presentationWin.hide();
+	presentationWin.hide();
 	// presentationWin.setFullScreen(false);
+	presentationWin.webContents.insertCSS('html, body { background: #000; }');
 	presentationWin.loadUrl(`file://${__dirname}/presenter/index.html`);
-	presentationWin.on('dom-ready', () => {
-	// setTimeout(() => {
-		// presentationWin.setSize(selectedDisplay.bounds.width, selectedDisplay.bounds.height);
-		// presentationWin.setContentSize(selectedDisplay.bounds.width, selectedDisplay.bounds.height);
-		// presentationWin.show();
-		presentationWin.setFullScreen(true);
-	}, 200);
+	presentationWin.webContents.insertCSS('html, body { background: #000; }');
 	presentationWin.on('closed', function() { presentationWin = null; })
+	presentationWin.webContents.on('dom-ready', function() {presentationWin.show();});
 });
 
 function createMainWindow () {
