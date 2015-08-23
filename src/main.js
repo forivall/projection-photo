@@ -20,6 +20,7 @@ ipc.on('display-selected', function(event, data) {
 var presentationWin = null;
 ipc.on('start-presentation', function() {
 	if (presentationWin != null) {
+		presentationWin.close();
 		return;
 	}
 	presentationWin = new BrowserWindow({
@@ -29,9 +30,20 @@ ipc.on('start-presentation', function() {
 		height: selectedDisplay.bounds.height,
 		'use-content-size': true,
 		fullscreen: true,
-		frame: false
+		frame: false,
+		'page-visibility': true
 	});
 	presentationWin.setMenuBarVisibility(false);
+	// presentationWin.hide();
+	// presentationWin.setFullScreen(false);
+	presentationWin.loadUrl(`file://${__dirname}/presenter/index.html`);
+	presentationWin.on('dom-ready', () => {
+	// setTimeout(() => {
+		// presentationWin.setSize(selectedDisplay.bounds.width, selectedDisplay.bounds.height);
+		// presentationWin.setContentSize(selectedDisplay.bounds.width, selectedDisplay.bounds.height);
+		// presentationWin.show();
+		presentationWin.setFullScreen(true);
+	}, 200);
 	presentationWin.on('closed', function() { presentationWin = null; })
 });
 
