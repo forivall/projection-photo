@@ -29,7 +29,10 @@
     "electron-app"
   ],
   "dependencies": {
-    "electron-debug": "^0.1.1"
+    "electron-debug": "^0.1.1",
+    "exif": "^0.4.0",
+    "react-image-gallery": "^0.4.2",
+    "walk": "^2.3.9"
   },
   "devDependencies": {
     "babel": "^5.8.21",

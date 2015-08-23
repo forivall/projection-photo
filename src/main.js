@@ -15,6 +15,16 @@ var selectedDisplay = {bounds: {x: 0, y: 0, width: 600, height: 400}};
 ipc.on('display-selected', function(event, data) {
 	console.log(data.display);
 	selectedDisplay = data.display;
+});
+
+var rootDirectory = __dirname;
+var rootDirectory = '/mnt/Peng/Jordan/Dropbox_jordanjklassen_gmail/Dropbox';
+ipc.on('set-root-directory', function(event, data) {
+	rootDirectory = data.root;
+})
+
+ipc.on('get-root-directory', function(event) {
+	event.returnValue = rootDirectory;
 })
 
 var presentationWin = null;
