@@ -56,8 +56,8 @@ export default class ImageFolder extends React.Component {
 
   }
 
-  collectImageFiles(root, selectedImagePaths) {
-    var walker = walk.walk(root);
+  collectImageFiles(baseRoot, selectedImagePaths) {
+    var walker = walk.walk(baseRoot);
     var images = [], selectedImages = [];
     walker.on('file', (root, fileStat, next) => {
       if (!/^\.jpe?g/i.test(path.extname(fileStat.name))) {
@@ -83,7 +83,7 @@ export default class ImageFolder extends React.Component {
             height: exifData.exif.ExifImageHeight,
           };
           images.push(image);
-          if (contains(selectedImagePaths, filePath)) {
+          if (contains(selectedImagePaths, path.relative(baseRoot, filePath))) {
             selectedImages.push(image);
           }
           next();
