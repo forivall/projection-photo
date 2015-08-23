@@ -21,7 +21,7 @@ gulp.task('build-node-js', function() {
 gulp.task('build-system-js', function() {
   return gulp
   .src(paths['system-js'])
-  .pipe(babel({modules: 'system'}))
+  .pipe(babel())
   .pipe(gulp.dest('lib'));
 });
 
