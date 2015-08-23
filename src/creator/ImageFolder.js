@@ -110,7 +110,7 @@ export default class ImageFolder extends React.Component {
     if (contains(this.state.selectedImages, this.state.currentImage)) {
       newSelectedImages = without(this.state.selectedImages, this.state.currentImage);
     } else {
-      newSelectedImages = this.state.selectedImages.concat(this.state.currentImage);
+      newSelectedImages = sortBy(this.state.selectedImages.concat(this.state.currentImage), 'date');
     }
     var root = this.state.root;
     fs.writeFile(this.slideshowPath(),
@@ -128,7 +128,13 @@ export default class ImageFolder extends React.Component {
   render() {
     return (<div>
       <input onChange={debounceHandler(this.handleDirChange, 1000)} placeholder="type directory here"></input>
-      <div><button onClick={this.handleAddRemove}>{contains(this.state.selectedImages, this.state.currentImage) ? 'Remove' : 'Add'} Image</button>{this.state.currentImage.date}</div>
+      <div>
+        <button onClick={this.handleAddRemove}>
+          {contains(this.state.selectedImages, this.state.currentImage) ? 'Remove' : 'Add'} Image
+        </button>
+        {this.state.currentImage.date} .
+        {this.state.root && this.state.currentImage.path && path.relative(this.state.root, this.state.currentImage.path)}
+      </div>
       <ImageGallery items={this.state.images} showBullets={true} onSlide={this.handleSlide}/>
       {
       // {this.state.images.map((image) => {
