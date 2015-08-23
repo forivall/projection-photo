@@ -8,6 +8,33 @@ require('crash-reporter').start();
 // adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();
 
+import ipc from 'ipc';
+
+var selectedDisplay = {bounds: {x: 0, y: 0, width: 600, height: 400}};
+
+ipc.on('display-selected', function(event, data) {
+	console.log(data.display);
+	selectedDisplay = data.display;
+})
+
+var presentationWin = null;
+ipc.on('start-presentation', function() {
+	if (presentationWin != null) {
+		return;
+	}
+	presentationWin = new BrowserWindow({
+		x: selectedDisplay.bounds.x,
+		y: selectedDisplay.bounds.y,
+		width: selectedDisplay.bounds.width,
+		height: selectedDisplay.bounds.height,
+		'use-content-size': true,
+		fullscreen: true,
+		frame: false
+	});
+	presentationWin.setMenuBarVisibility(false);
+	presentationWin.on('closed', function() { presentationWin = null; })
+});
+
 function createMainWindow () {
 	const win = new BrowserWindow({
 		width: 600,

@@ -14,8 +14,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "gulp watch & electron .",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=0.30.4"
+    "start": "electron .",
+    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=0.30.4",
+    "watch": "gulp watch"
   },
   "main": "lib/main.js",
   "files": [
