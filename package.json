@@ -1,7 +1,7 @@
 {
   "name": "projection-photo",
   "productName": "ProjectionPhoto",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Simple app to display a slideshow of photos",
   "license": "MIT",
   "repository": "forivall/projection-photo",
@@ -21,9 +21,11 @@
   "main": "lib/main.js",
   "files": [
     "lib/creator/index.js",
-    "lib/creator/config.js",
     "lib/creator/index.html",
-    "lib/creator/index.css"
+    "lib/creator/index.css",
+    "lib/creator/ImageFolder.js",
+    "lib/creator/ScreenSelector.js",
+    "lib/presenter/index.html"
   ],
   "keywords": [
     "electron-app"
@@ -31,6 +33,9 @@
   "dependencies": {
     "electron-debug": "^0.1.1",
     "exif": "^0.4.0",
+    "jquery": "^2.1.4",
+    "kenburns": "git+https://github.com/forivall/kenburns.git#aspect-ratio",
+    "lodash": "^3.10.1",
     "react-image-gallery": "^0.4.2",
     "walk": "^2.3.9"
   },
