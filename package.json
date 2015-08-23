@@ -2,26 +2,27 @@
   "name": "projection-photo",
   "productName": "ProjectionPhoto",
   "version": "0.0.0",
-  "description": "My kryptonian app",
+  "description": "Simple app to display a slideshow of photos",
   "license": "MIT",
-  "main": "index.js",
   "repository": "forivall/projection-photo",
   "author": {
     "name": "Jordan Klassen",
-    "email": "jordan@klassen.me.uk",
+    "email": "forivall@gmail.com",
     "url": "forivall.github.io/projection-photo"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "electron .",
+    "start": "gulp watch & electron .",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=0.30.4"
   },
+  "main": "lib/main.js",
   "files": [
-    "index.js",
-    "index.html",
-    "index.css"
+    "lib/creator/index.js",
+    "lib/creator/config.js",
+    "lib/creator/index.html",
+    "lib/creator/index.css"
   ],
   "keywords": [
     "electron-app"
@@ -30,6 +31,7 @@
     "electron-debug": "^0.1.1"
   },
   "devDependencies": {
+    "babel": "^5.8.21",
     "electron-packager": "^5.0.0",
     "electron-prebuilt": "^0.30.4"
   }
