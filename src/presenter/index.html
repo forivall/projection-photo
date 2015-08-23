@@ -13,6 +13,7 @@
 		<script src="../../node_modules/kenburns/js/jquery.kenburns.js"></script>
 	</head>
 	<body>
+    <div id="caption" style="position: absolute; width: 90%; left: 5%; text-align: center; z-index: 1000; color: white; text-shadow: 0.5vh 0.5vh 3vh black; font-size: 16vh;"></div>
   	<div id="kenburns-slideshow"></div>
     <script type="text/javascript">
 
@@ -34,8 +35,10 @@
               data = JSON.parse(rawData);
             } catch (e) {}
           }
+          var curTitle = '';
+          var slideshowImages = data.images.map(function(imagePath) { return path.join(rootPath, imagePath); });
           jQuery('#kenburns-slideshow').Kenburns({
-            images: data.images.map(function(imagePath) { return path.join(rootPath, imagePath); }),
+            images: slideshowImages,
             // images: [
             //   "../../node_modules/kenburns/images/image0.jpg",
             //   "../../node_modules/kenburns/images/image1.jpg",
@@ -51,6 +54,16 @@
             ease3d:'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
 
             onSlideComplete: function(){
+              var index = this.getSlideIndex();
+              var newTitle = data.images[index].split('/')[0];
+              console.log(data.images[index]);
+              console.log(curTitle, newTitle);
+              if (newTitle != curTitle) {
+                curTitle = newTitle;
+                jQuery('#caption').text(newTitle);
+              } else {
+                jQuery('#caption').text('');
+              }
             },
             onLoadingComplete: function(){
               //$('#status').html("Loading Complete");
