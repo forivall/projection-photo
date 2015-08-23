@@ -4,6 +4,11 @@
 		<meta charset="utf-8">
 		<title>Slideshow!</title>
 		<link rel="stylesheet" href="../../node_modules/kenburns/css/style.css">
+    <style type="text/css">
+      body {
+        cursor: none;
+      }
+    </style>
 		<script>window.jQuery = require('jquery');</script>
 		<script src="../../node_modules/kenburns/js/jquery.kenburns.js"></script>
 	</head>
@@ -11,29 +16,48 @@
   	<div id="kenburns-slideshow"></div>
     <script type="text/javascript">
 
-    jQuery(document).ready(function() {
-        jQuery('#kenburns-slideshow').Kenburns({
-          images: [
-            "../../node_modules/kenburns/images/image0.jpg",
-            "../../node_modules/kenburns/images/image1.jpg",
-            "../../node_modules/kenburns/images/image2.jpg",
-            "../../node_modules/kenburns/images/image3.jpg",
-            "../../node_modules/kenburns/images/image4.jpg",
-            "../../node_modules/kenburns/images/image5.jpg"
-          ],
-          scale:0.75,
-          duration:8000,
-          fadeSpeed:1200,
-          ease3d:'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
+      var rootPath = require('ipc').sendSync('get-root-directory');
+      var path = require('path');
+      var fs = require('fs');
 
-          onSlideComplete: function(){
-          },
-          onLoadingComplete: function(){
-            //$('#status').html("Loading Complete");
-          }
-
+      jQuery(document).ready(function() {
+        // handle ESC key
+        jQuery(document.body).on('keyup', function(event) {
+            if (event.which === 27) {
+              window.close();
+            }
         });
-    });
+        fs.readFile(path.join(rootPath, 'projection-photo-slideshow.json'), {encoding: 'utf8'}, function(err, rawData) {
+          var data = {images: []};
+          if (rawData) {
+            try {
+              data = JSON.parse(rawData);
+            } catch (e) {}
+          }
+          jQuery('#kenburns-slideshow').Kenburns({
+            images: data.images.map(function(imagePath) { return path.join(rootPath, imagePath); }),
+            // images: [
+            //   "../../node_modules/kenburns/images/image0.jpg",
+            //   "../../node_modules/kenburns/images/image1.jpg",
+            //   "../../node_modules/kenburns/images/image2.jpg",
+            //   "../../node_modules/kenburns/images/image3.jpg",
+            //   "../../node_modules/kenburns/images/image4.jpg",
+            //   "../../node_modules/kenburns/images/image5.jpg"
+            // ],
+            scale:0.75,
+            duration:8000,
+            fadeSpeed:1200,
+            ease3d:'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
+
+            onSlideComplete: function(){
+            },
+            onLoadingComplete: function(){
+              //$('#status').html("Loading Complete");
+            }
+
+          });
+        });
+      });
     </script>
 	</body>
 </html>

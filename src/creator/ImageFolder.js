@@ -112,8 +112,9 @@ export default class ImageFolder extends React.Component {
     } else {
       newSelectedImages = this.state.selectedImages.concat(this.state.currentImage);
     }
+    var root = this.state.root;
     fs.writeFile(this.slideshowPath(),
-      JSON.stringify({images: pluck(newSelectedImages, 'path')}), (err) => {
+      JSON.stringify({images: pluck(newSelectedImages, 'path').map((imgPath) => path.relative(root, imgPath))}), (err) => {
         if (err) { console.log('error writing file: ' + err); }
       }
     );
