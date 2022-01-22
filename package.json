@@ -35,7 +35,7 @@
     "exif": "^0.4.0",
     "jquery": "^2.1.4",
     "kenburns": "git+https://github.com/forivall/kenburns.git#aspect-ratio",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.21",
     "react-image-gallery": "^0.4.2",
     "walk": "^2.3.9"
   },
