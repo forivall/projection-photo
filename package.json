@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "babel": "^5.8.21",
-    "electron-packager": "^5.0.0",
+    "electron-packager": "^17.1.0",
     "electron-prebuilt": "^0.30.4"
   }
 }
