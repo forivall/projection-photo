@@ -33,7 +33,7 @@
   "dependencies": {
     "electron-debug": "^0.1.1",
     "exif": "^0.4.0",
-    "jquery": "^2.1.4",
+    "jquery": "^3.6.4",
     "kenburns": "git+https://github.com/forivall/kenburns.git#aspect-ratio",
     "lodash": "^3.10.1",
     "react-image-gallery": "^0.4.2",
